@@ -46,11 +46,11 @@ class S3StoreTestCase(SqlAlchemyTestCase):
     def test_put_error(self):
         with mockup_s3_server(TEST_BUCKET) as (server, uri):
             store = create_s3_store(base_url=uri[:-2])
-            target_filename = 'test_put_from_stream/file_from_stream1.txt'
             content = b'Lorem ipsum dolor sit amet'
             stream = io.BytesIO(content)
 
             with self.assertRaises(S3Error):
+                target_filename = 'test_put_from_stream/file_from_stream1.txt'
                 store.put(target_filename, stream)
 
     def test_rrs_put(self):
@@ -140,10 +140,10 @@ class S3StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -169,10 +169,10 @@ class S3StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -206,10 +206,10 @@ class S3StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -218,8 +218,8 @@ class S3StoreTestCase(SqlAlchemyTestCase):
                     base_url, person1.file.path, person1.file.timestamp))
 
     def test_cdn_url(self):
-        cdn_url = 'http//test.sqlalchemy-media.com'
         with mockup_s3_server(TEST_BUCKET) as (server, uri):
+            cdn_url = 'http//test.sqlalchemy-media.com'
             StoreManager.register(
                 's3',
                 functools.partial(create_s3_store, base_url=uri, cdn_url=cdn_url),
@@ -235,10 +235,10 @@ class S3StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -247,8 +247,8 @@ class S3StoreTestCase(SqlAlchemyTestCase):
                     cdn_url, person1.file.path, person1.file.timestamp))
 
     def test_cdn_url_strip(self):
-        cdn_url = 'http//test.sqlalchemy-media.com/'
         with mockup_s3_server(TEST_BUCKET) as (server, uri):
+            cdn_url = 'http//test.sqlalchemy-media.com/'
             StoreManager.register(
                 's3',
                 functools.partial(create_s3_store, base_url=uri, cdn_url=cdn_url),
@@ -264,10 +264,10 @@ class S3StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -276,9 +276,9 @@ class S3StoreTestCase(SqlAlchemyTestCase):
                     cdn_url, person1.file.path, person1.file.timestamp))
 
     def test_cdn_url_with_prefix(self):
-        prefix = 'media'
-        cdn_url = 'http//test.sqlalchemy-media.com'
         with mockup_s3_server(TEST_BUCKET) as (server, uri):
+            prefix = 'media'
+            cdn_url = 'http//test.sqlalchemy-media.com'
             StoreManager.register(
                 's3',
                 functools.partial(create_s3_store, prefix=prefix, base_url=uri, cdn_url=cdn_url),
@@ -294,10 +294,10 @@ class S3StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -306,9 +306,9 @@ class S3StoreTestCase(SqlAlchemyTestCase):
                     cdn_url, prefix, person1.file.path, person1.file.timestamp))
 
     def test_cdn_url_with_ignore_prefix(self):
-        prefix = 'media'
-        cdn_url = 'http//test.sqlalchemy-media.com'
         with mockup_s3_server(TEST_BUCKET) as (server, uri):
+            prefix = 'media'
+            cdn_url = 'http//test.sqlalchemy-media.com'
             StoreManager.register(
                 's3',
                 functools.partial(create_s3_store, prefix=prefix, base_url=uri, cdn_url=cdn_url,
@@ -325,10 +325,10 @@ class S3StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')

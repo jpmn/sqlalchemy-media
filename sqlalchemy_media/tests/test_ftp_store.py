@@ -81,10 +81,10 @@ class FTPStoreTestCase(SqlAlchemyTestCase):
 
         person1 = Person()
         self.assertIsNone(person1.file)
-        sample_content = b'Simple text.'
-
         with StoreManager(session):
             person1 = Person()
+            sample_content = b'Simple text.'
+
             person1.file = File.create_from(io.BytesIO(sample_content),
                                             content_type='text/plain',
                                             extension='.txt')

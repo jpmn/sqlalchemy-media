@@ -30,11 +30,7 @@ def copy_stream(source, target: FileLike, *, chunk_size: int= 16 * 1024) -> int:
 
 
 def md5sum(f):
-    if isinstance(f, str):
-        file_obj = open(f, 'rb')
-    else:
-        file_obj = f
-
+    file_obj = open(f, 'rb') if isinstance(f, str) else f
     try:
         checksum = md5()
         while True:

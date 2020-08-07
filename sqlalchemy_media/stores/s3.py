@@ -49,11 +49,7 @@ class S3Store(Store):
         self.prefix = prefix
         self.acl = acl
 
-        if base_url:
-            self.base_url = base_url
-        else:
-            self.base_url = self.base_url.format(bucket)
-
+        self.base_url = base_url if base_url else self.base_url.format(bucket)
         if prefix:
             self.base_url = '{0}/{1}'.format(self.base_url, prefix)
             if cdn_url and not cdn_prefix_ignore:
@@ -74,10 +70,7 @@ class S3Store(Store):
         ensure_aws4auth()
 
         auth = AWS4Auth(self.access_key, self.secret_key, self.region, 's3')
-        if rrs:
-            storage_class = 'REDUCED_REDUNDANCY'
-        else:
-            storage_class = 'STANDARD'
+        storage_class = 'REDUCED_REDUNDANCY' if rrs else 'STANDARD'
         headers = {
             'Cache-Control': 'max-age=' + str(self.max_age),
             'x-amz-acl': self.acl,
@@ -115,8 +108,5 @@ class S3Store(Store):
         return BytesIO(res.content)
 
     def locate(self, attachment) -> str:
-        if self.cdn_url:
-            base_url = self.cdn_url
-        else:
-            base_url = self.base_url
+        base_url = self.cdn_url if self.cdn_url else self.base_url
         return '%s/%s' % (base_url, attachment.path)

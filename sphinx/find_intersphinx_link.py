@@ -20,8 +20,8 @@ def make_cache(name, uri):
     inv = fetch_inventory(warnings, uri, join(uri, 'objects.inv'))
     for k, v in inv.items():
         filename = join(dest_dir, k.replace(':', '-'))
-        line_counter = 0
         with open(filename, 'w+') as f:
+            line_counter = 0
             for sk, sv in v.items():
                 line_counter +=1
                 if line_counter % 100 == 0:

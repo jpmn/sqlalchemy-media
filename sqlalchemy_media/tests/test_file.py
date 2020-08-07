@@ -151,7 +151,7 @@ class FileTestCase(TempStoreTestCase):
         person1 = Person()
 
         def set_invalid_type():
-            person1.cv = list()
+            person1.cv = []
 
         def set_invalid_type_via_constructor():
             Person(cv=67)
@@ -161,9 +161,11 @@ class FileTestCase(TempStoreTestCase):
 
     def test_attribute_type_coercion(self):
 
-        class MyAttachmentType(File):
+
+
+
+        class MyAttachmentType((File)):
             __auto_coercion__ = True
-            pass
 
         class Person(self.Base):
             __tablename__ = 'person'

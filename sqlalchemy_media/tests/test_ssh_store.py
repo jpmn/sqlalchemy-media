@@ -21,8 +21,7 @@ class SSHStoreTestCase(MockupSSHTestCase):
         if exists(path):
             shutil.rmtree(self.temp_path)
         makedirs(path)
-        s = SSHStore(self.create_ssh_client(), self.temp_path, self.base_url)
-        return s
+        return SSHStore(self.create_ssh_client(), self.temp_path, self.base_url)
 
     def test_put_from_stream(self):
         store = self.create_ssh_store()

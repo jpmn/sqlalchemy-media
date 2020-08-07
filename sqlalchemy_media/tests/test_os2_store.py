@@ -47,10 +47,10 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
     def test_put_error(self):
         with mockup_os2_server(self.temp_path, TEST_BUCKET) as (server, url):
             store = create_os2_store(server, bucket=TEST_BUCKET[:-2], base_url=url)
-            target_filename = 'test_put_from_stream/file_from_stream1.txt'
             content = b'Lorem ipsum dolor sit amet'
             stream = io.BytesIO(content)
             with self.assertRaises(OS2Error):
+                target_filename = 'test_put_from_stream/file_from_stream1.txt'
                 store.put(target_filename, stream)
 
     def test_delete(self):
@@ -108,10 +108,10 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content), content_type='text/plain', extension='.txt')
                 self.assertIsInstance(person1.file, File)
                 self.assertEqual(
@@ -143,10 +143,10 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -180,10 +180,10 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -198,8 +198,8 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
                 )
 
     def test_cdn_url(self):
-        cdn_url = 'http//test.sqlalchemy-media.com'
         with mockup_os2_server(self.temp_path, TEST_BUCKET) as (server, url):
+            cdn_url = 'http//test.sqlalchemy-media.com'
             StoreManager.register(
                 'os2',
                 functools.partial(create_os2_store, server, base_url=url, cdn_url=cdn_url),
@@ -215,10 +215,10 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -233,8 +233,8 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
                 )
 
     def test_cdn_url_strip(self):
-        cdn_url = 'http//test.sqlalchemy-media.com/'
         with mockup_os2_server(self.temp_path, TEST_BUCKET) as (server, url):
+            cdn_url = 'http//test.sqlalchemy-media.com/'
             StoreManager.register(
                 'os2',
                 functools.partial(create_os2_store, server, base_url=url, cdn_url=cdn_url),
@@ -250,10 +250,10 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -268,9 +268,9 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
                 )
 
     def test_cdn_url_with_prefix(self):
-        prefix = 'media'
-        cdn_url = 'http//test.sqlalchemy-media.com'
         with mockup_os2_server(self.temp_path, TEST_BUCKET) as (server, url):
+            prefix = 'media'
+            cdn_url = 'http//test.sqlalchemy-media.com'
             StoreManager.register(
                 'os2',
                 functools.partial(create_os2_store, server, prefix=prefix, base_url=url,
@@ -287,10 +287,10 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')
@@ -306,9 +306,9 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
                 )
 
     def test_cdn_url_with_ignore_prefix(self):
-        prefix = 'media'
-        cdn_url = 'http//test.sqlalchemy-media.com'
         with mockup_os2_server(self.temp_path, TEST_BUCKET) as (server, url):
+            prefix = 'media'
+            cdn_url = 'http//test.sqlalchemy-media.com'
             StoreManager.register(
                 'os2',
                 functools.partial(create_os2_store, server, prefix=prefix, base_url=url,
@@ -325,10 +325,10 @@ class OS2StoreTestCase(SqlAlchemyTestCase):
 
             person1 = Person()
             self.assertIsNone(person1.file)
-            sample_content = b'Simple text.'
-
             with StoreManager(session):
                 person1 = Person()
+                sample_content = b'Simple text.'
+
                 person1.file = File.create_from(io.BytesIO(sample_content),
                                                 content_type='text/plain',
                                                 extension='.txt')

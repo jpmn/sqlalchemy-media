@@ -45,11 +45,7 @@ class OS2Store(Store):
         self.acl = acl
         self.base_headers = base_headers or {}
 
-        if base_url:
-            self.base_url = base_url
-        else:
-            self.base_url = self.base_url.format(bucket, region)
-
+        self.base_url = base_url if base_url else self.base_url.format(bucket, region)
         if prefix:
             self.base_url = '%s/%s' % (self.base_url, prefix)
             if cdn_url and not cdn_prefix_ignore:
@@ -107,8 +103,5 @@ class OS2Store(Store):
         return BytesIO(res.content)
 
     def locate(self, attachment) -> str:
-        if self.cdn_url:
-            base_url = self.cdn_url
-        else:
-            base_url = self.base_url
+        base_url = self.cdn_url if self.cdn_url else self.base_url
         return '%s/%s' % (base_url, attachment.path)

@@ -319,15 +319,14 @@ class StoreManager(object):
                     return
 
                 store_manager = StoreManager.get_current_store_manager()
-                if store_manager.delete_orphan:
-                    if value is not old_value:
-                        if collection:
-                            if isinstance(old_value, dict):
-                                store_manager.orphaned(*(set(old_value.values()) - set(value.values())))
-                            else:
-                                store_manager.orphaned(*(set(old_value) - set(value)))
+                if store_manager.delete_orphan and value is not old_value:
+                    if collection:
+                        if isinstance(old_value, dict):
+                            store_manager.orphaned(*(set(old_value.values()) - set(value.values())))
                         else:
-                            store_manager.orphaned(old_value)
+                            store_manager.orphaned(*(set(old_value) - set(value)))
+                    else:
+                        store_manager.orphaned(old_value)
 
             event.listen(attr, 'set', on_set_attr, propagate=True)
 
